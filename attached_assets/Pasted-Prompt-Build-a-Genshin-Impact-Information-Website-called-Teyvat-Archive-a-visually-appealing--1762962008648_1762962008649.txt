@@ -1,0 +1,140 @@
+Prompt:
+
+Build a Genshin Impact Information Website called “Teyvat Archive” — a visually appealing, interactive site that helps players explore Genshin’s lore, characters, artifacts, and gameplay tips.
+
+The website should serve as a complete guide for both new and experienced players, featuring filters, search tools, and detailed pages to make information easy to find.
+
+🏠 1. Home Page
+
+Overview of the Genshin Impact world (Teyvat) and main regions (Mondstadt, Liyue, Inazuma, Sumeru, Fontaine, Natlan).
+
+Highlight sections such as “Characters,” “Artifacts,” “Team Builder,” and “Beginner’s Guide.”
+
+Add a search bar that lets users quickly look up characters, artifacts, or regions by name.
+
+Include a news or update panel (optional) for new content or patches.
+
+💫 2. Character Database Page
+
+Grid or card-style gallery of all playable characters.
+
+Each card shows:
+
+Character name
+
+Element (Vision)
+
+Weapon type
+
+Rarity (Stars)
+
+Main role (DPS/Support/Healer)
+
+Include filters for:
+
+Element (e.g. Pyro, Hydro, Cryo)
+
+Weapon type (Sword, Bow, Claymore, Polearm, Catalyst)
+
+Region (Mondstadt, Liyue, etc.)
+
+Rarity (4★, 5★)
+
+When a character is clicked, open a detail page showing:
+
+Lore/background
+
+Recommended team setups
+
+Best artifacts and weapons
+
+Talent leveling priorities
+
+⚔️ 3. Artifacts & Runes Page
+
+List all artifact sets and their stats, set bonuses (2-piece / 4-piece), and drop locations.
+
+Include filters and search options:
+
+Filter by Artifact Type (Flower, Feather, Sands, Goblet, Circlet)
+
+Filter by Bonus Type (ATK%, HP%, Elemental Mastery, Crit Rate, etc.)
+
+Filter by Location/Domain (where to farm)
+
+Show recommended characters for each set.
+
+🧩 4. Team Builder Page
+
+Let users pick up to 4 characters.
+
+Show elemental synergy and reactions (e.g., Melt, Vaporize, Overload).
+
+Suggest best artifact combinations and support roles.
+
+Allow exporting or saving favorite teams (optional).
+
+📘 5. Beginner’s Guide Page
+
+Step-by-step tips for new players:
+
+Leveling characters and weapons
+
+Adventure Rank progression
+
+Resin management
+
+Daily commissions and exploration
+
+Include a “Starter Team” recommendation section.
+
+🔍 6. Search & Filter System
+
+Global search bar at the top of the website to quickly find:
+
+Characters
+
+Artifacts
+
+Domains
+
+Regions
+
+Use dropdowns or checkboxes for filtering by:
+
+Element / Weapon / Role
+
+Artifact type or effect
+
+Region or domain location
+
+🎨 7. Design & Style
+
+Clean and fantasy-inspired UI (similar to Genshin’s theme).
+
+Use soft gradients, subtle shadows, and icons from Genshin-like resources.
+
+Smooth hover animations, collapsible sections, and responsive grid layouts.
+
+Include light/dark mode toggle.
+
+⚙️ 8. Tech Stack
+
+Use React or Next.js for a dynamic, SEO-friendly website.
+
+Store character and artifact info in local JSON files or connect to the Genshin.dev API.
+
+Ensure full mobile responsiveness.
+
+⭐ 9. Bonus Features
+
+“Favorites” feature to save characters, builds, or artifact sets.
+
+“Domain Finder” page — users can search for a domain and see what artifacts it drops.
+
+“Compare Builds” tool (optional advanced feature).
+
+Footer with contact info, credits, and official Genshin links.
+
+Goal:
+Create an elegant, easy-to-use Genshin Impact website that combines lore, build guides, artifact filters, and player tips — helping users explore Teyvat and optimize their teams effortlessly.
