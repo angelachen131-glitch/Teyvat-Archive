@@ -81,11 +81,22 @@ export default {
           busy: "rgb(239 68 68)",
           offline: "rgb(156 163 175)",
         },
+        // Genshin Impact element colors
+        element: {
+          pyro: "hsl(14 90% 53% / <alpha-value>)",
+          hydro: "hsl(207 90% 54% / <alpha-value>)",
+          cryo: "hsl(194 85% 62% / <alpha-value>)",
+          electro: "hsl(271 76% 60% / <alpha-value>)",
+          anemo: "hsl(166 60% 50% / <alpha-value>)",
+          geo: "hsl(45 93% 47% / <alpha-value>)",
+          dendro: "hsl(88 65% 47% / <alpha-value>)",
+        },
       },
       fontFamily: {
-        sans: ["var(--font-sans)"],
+        sans: ["Inter", "var(--font-sans)"],
         serif: ["var(--font-serif)"],
-        mono: ["var(--font-mono)"],
+        mono: ["JetBrains Mono", "var(--font-mono)"],
+        heading: ["Poppins", "Inter", "sans-serif"],
       },
       keyframes: {
         "accordion-down": {
