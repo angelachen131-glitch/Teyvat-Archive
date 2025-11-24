@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useRoute, Link } from "wouter";
-import { ArrowLeft, Sparkles } from "lucide-react";
+import { ArrowLeft, Heart, Sparkles } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -8,15 +8,19 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { Character } from "@shared/schema";
 import { getElementColor, getElementBgColor, getStarDisplay } from "@/lib/utils";
+import { useFavorites } from "@/hooks/use-favorites";
 
 export default function CharacterDetail() {
   const [, params] = useRoute("/characters/:id");
   const characterId = params?.id;
+  const { favorites, toggleFavorite } = useFavorites();
 
   const { data: character, isLoading } = useQuery<Character>({
     queryKey: ["/api/characters", characterId],
     enabled: !!characterId,
   });
+
+  const isFavorited = character ? favorites.includes(character.id) : false;
 
   if (isLoading) {
     return (
@@ -50,12 +54,23 @@ export default function CharacterDetail() {
   return (
     <div className="py-12 md:py-16">
       <div className="container mx-auto px-4">
-        <Link href="/characters">
-          <Button variant="ghost" className="mb-8" data-testid="button-back">
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Characters
+        <div className="flex items-center justify-between mb-8">
+          <Link href="/characters">
+            <Button variant="ghost" data-testid="button-back">
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Back to Characters
+            </Button>
+          </Link>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => character && toggleFavorite(character.id)}
+            data-testid="button-favorite-character"
+            className={isFavorited ? "text-red-500" : ""}
+          >
+            <Heart className={`h-5 w-5 ${isFavorited ? "fill-current" : ""}`} />
           </Button>
-        </Link>
+        </div>
 
         <div className={`relative h-80 rounded-lg mb-12 overflow-hidden border-4 ${getElementBgColor(character.element)}`}>
           <img 
