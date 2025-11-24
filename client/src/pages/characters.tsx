@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
-import { Sparkles, Filter, X, Heart } from "lucide-react";
+import { Sparkles, Filter, X, Heart, ChevronLeft, ChevronRight } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -11,11 +11,14 @@ import { elements, weaponTypes, regions } from "@shared/schema";
 import { getElementColor, getElementBgColor, getStarDisplay } from "@/lib/utils";
 import { useFavorites } from "@/hooks/use-favorites";
 
+const ITEMS_PER_PAGE = 24;
+
 export default function Characters() {
   const [elementFilter, setElementFilter] = useState<Element | null>(null);
   const [weaponFilter, setWeaponFilter] = useState<WeaponType | null>(null);
   const [regionFilter, setRegionFilter] = useState<Region | null>(null);
   const [rarityFilter, setRarityFilter] = useState<4 | 5 | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const { data: characters = [], isLoading } = useQuery<Character[]>({
     queryKey: ["/api/characters"],
@@ -31,6 +34,12 @@ export default function Characters() {
     return true;
   });
 
+  const totalPages = Math.ceil(filteredCharacters.length / ITEMS_PER_PAGE);
+  const paginatedCharacters = filteredCharacters.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
   const hasActiveFilters = elementFilter || weaponFilter || regionFilter || rarityFilter;
 
   const clearFilters = () => {
@@ -38,6 +47,7 @@ export default function Characters() {
     setWeaponFilter(null);
     setRegionFilter(null);
     setRarityFilter(null);
+    setCurrentPage(1);
   };
 
   return (
@@ -175,71 +185,115 @@ export default function Characters() {
             </Button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredCharacters.map((character) => (
-              <div key={character.id}>
-                <Link href={`/characters/${character.id}`}>
-                  <Card
-                    className={`h-full hover-elevate active-elevate-2 cursor-pointer transition-all group border-2 ${getElementBgColor(character.element)}`}
-                    data-testid={`card-character-${character.id}`}
-                  >
-                    <CardHeader className="p-6">
-                      <div className="relative aspect-[3/4] mb-4 rounded-md bg-muted overflow-hidden">
-                        <img 
-                          src={character.imageUrl} 
-                          alt={character.name}
-                          className="w-full h-full object-cover"
-                          onError={(e) => {
-                            e.currentTarget.style.display = 'none';
-                          }}
-                        />
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="absolute top-2 left-2 h-9 w-9"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            toggleFavorite(character.id);
-                          }}
-                          data-testid={`button-favorite-${character.id}`}
-                        >
-                          <Heart
-                            className={`h-5 w-5 ${
-                              isFavorited(character.id)
-                                ? "fill-red-500 text-red-500"
-                                : "text-white drop-shadow-md"
-                            }`}
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
+              {paginatedCharacters.map((character) => (
+                <div key={character.id}>
+                  <Link href={`/characters/${character.id}`}>
+                    <Card
+                      className={`h-full hover-elevate active-elevate-2 cursor-pointer transition-all group border-2 ${getElementBgColor(character.element)}`}
+                      data-testid={`card-character-${character.id}`}
+                    >
+                      <CardHeader className="p-6">
+                        <div className="relative aspect-[3/4] mb-4 rounded-md bg-muted overflow-hidden">
+                          <img 
+                            src={character.imageUrl} 
+                            alt={character.name}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              e.currentTarget.style.display = 'none';
+                            }}
                           />
-                        </Button>
-                        <Badge
-                          className={`absolute top-2 right-2 ${getElementColor(character.element)}`}
-                          variant="outline"
-                        >
-                          {character.element}
-                        </Badge>
-                      </div>
-                      <CardTitle className="text-xl mb-2 group-hover:text-primary transition-colors">
-                        {character.name}
-                      </CardTitle>
-                      <CardDescription className="space-y-1">
-                        <div className="flex items-center gap-2">
-                          <span className="text-yellow-500">{getStarDisplay(character.rarity)}</span>
-                          <span>•</span>
-                          <span>{character.weapon}</span>
-                        </div>
-                        <div className="text-xs">
-                          <Badge variant="secondary" className="text-xs">
-                            {character.role}
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="absolute top-2 left-2 h-9 w-9"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              toggleFavorite(character.id);
+                            }}
+                            data-testid={`button-favorite-${character.id}`}
+                          >
+                            <Heart
+                              className={`h-5 w-5 ${
+                                isFavorited(character.id)
+                                  ? "fill-red-500 text-red-500"
+                                  : "text-white drop-shadow-md"
+                              }`}
+                            />
+                          </Button>
+                          <Badge
+                            className={`absolute top-2 right-2 ${getElementColor(character.element)}`}
+                            variant="outline"
+                          >
+                            {character.element}
                           </Badge>
                         </div>
-                      </CardDescription>
-                    </CardHeader>
-                  </Card>
-                </Link>
+                        <CardTitle className="text-xl mb-2 group-hover:text-primary transition-colors">
+                          {character.name}
+                        </CardTitle>
+                        <CardDescription className="space-y-1">
+                          <div className="flex items-center gap-2">
+                            <span className="text-yellow-500">{getStarDisplay(character.rarity)}</span>
+                            <span>•</span>
+                            <span>{character.weapon}</span>
+                          </div>
+                          <div className="text-xs">
+                            <Badge variant="secondary" className="text-xs">
+                              {character.role}
+                            </Badge>
+                          </div>
+                        </CardDescription>
+                      </CardHeader>
+                    </Card>
+                  </Link>
+                </div>
+              ))}
+            </div>
+
+            {totalPages > 1 && (
+              <div className="flex items-center justify-center gap-4 mt-12 pt-8 border-t">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                  disabled={currentPage === 1}
+                  data-testid="button-previous-page"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </Button>
+                
+                <div className="flex items-center gap-2">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                    <Button
+                      key={page}
+                      variant={currentPage === page ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => setCurrentPage(page)}
+                      data-testid={`button-page-${page}`}
+                    >
+                      {page}
+                    </Button>
+                  ))}
+                </div>
+
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                  disabled={currentPage === totalPages}
+                  data-testid="button-next-page"
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </Button>
               </div>
-            ))}
-          </div>
+            )}
+
+            <div className="text-center mt-6 text-sm text-muted-foreground">
+              Showing {(currentPage - 1) * ITEMS_PER_PAGE + 1}-{Math.min(currentPage * ITEMS_PER_PAGE, filteredCharacters.length)} of {filteredCharacters.length} characters
+            </div>
+          </>
         )}
       </div>
     </div>
