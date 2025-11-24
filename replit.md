@@ -130,10 +130,30 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (Latest Session)
 
-### Features Added
+### Database Expansion
+1. **Complete Character Roster** (84 Unique Characters)
+   - Expanded from 12 to 84+ playable characters
+   - Covers all 5 regions: Mondstadt, Liyue, Inazuma, Sumeru, Fontaine, plus Snezhnaya and Natlan
+   - All characters with proper enka.network CDN image URLs (UI_AvatarIcon format)
+   - Each character includes: element, weapon, rarity, region, role, lore, talents, recommended artifacts/weapons, build priority, and constellations
+
+2. **Pagination System**
+   - Characters page now displays 24 characters per page
+   - Previous/Next navigation buttons
+   - Page number indicators
+   - Efficient client-side pagination
+
+3. **Favorite Button on Detail Pages**
+   - Added Heart icon button to character detail pages (top right)
+   - Filled heart when character is favorited
+   - Works with localStorage persistence
+   - Seamless integration with existing favorites system
+
+### Features (Previously Implemented)
 1. **Favorites System** (localStorage-based)
    - Custom `useFavorites` hook with localStorage persistence
    - Favorite buttons on character cards with visual feedback
+   - Favorite button on character detail pages
    - Dedicated Favorites page showing all saved characters
    - Heart icon in navigation with count badge
 
@@ -159,12 +179,12 @@ Preferred communication style: Simple, everyday language.
    - Build selection dialog for easy browsing
 
 ### UI/UX Enhancements
-- Added Domains and Build Comparison navigation links
-- Enhanced Team Builder with detailed synergy analysis card
-- Character cards now include favorite heart button
+- Pagination controls on character grid
+- Favorite buttons on character cards AND detail pages
 - Favorites count badge in header
 - Improved visual hierarchy with alerts and info boxes
-- Better mobile responsiveness for all new features
+- Better mobile responsiveness for all features
+- Consistent Heart icon for favorites across all pages
 
 ## External Dependencies
 
