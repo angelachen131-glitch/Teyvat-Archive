@@ -38,7 +38,8 @@ export class MemStorage implements IStorage {
         recommendedArtifacts: ["Crimson Witch of Flames", "Gladiator's Finale"],
         recommendedWeapons: ["Wolf's Gravestone", "Serpent Spine", "Prototype Archaic"],
         buildPriority: "Focus on ATK%, Pyro DMG Bonus, and Crit Rate/DMG. Aim for 60%+ Crit Rate and 120%+ Crit DMG. EM substats are valuable for reaction teams.",
-        constellations: "C1 provides a significant damage boost. C2 increases ATK and attack speed. C4 is a major power spike. C6 reduces skill cooldown and increases damage after burst."
+        constellations: "C1 provides a significant damage boost. C2 increases ATK and attack speed. C4 is a major power spike. C6 reduces skill cooldown and increases damage after burst.",
+        imageUrl: "https://enka.network/ui/UI_AvatarIcon_Diluc.png"
       },
       {
         id: "hu-tao",
@@ -54,7 +55,8 @@ export class MemStorage implements IStorage {
         recommendedArtifacts: ["Crimson Witch of Flames", "Shimenawa's Reminiscence"],
         recommendedWeapons: ["Staff of Homa", "Dragon's Bane", "Deathmatch"],
         buildPriority: "Focus on HP%, Pyro DMG Bonus, and Crit Rate/DMG. Keep HP below 50% during Skill for maximum damage. Aim for 30k+ HP and good crit ratios.",
-        constellations: "C1 removes stamina cost during skill. C6 is game-changing, preventing death and boosting crit rate massively."
+        constellations: "C1 removes stamina cost during skill. C6 is game-changing, preventing death and boosting crit rate massively.",
+        imageUrl: "https://enka.network/ui/UI_AvatarIcon_Hutao.png"
       },
       {
         id: "raiden-shogun",
@@ -70,7 +72,8 @@ export class MemStorage implements IStorage {
         recommendedArtifacts: ["Emblem of Severed Fate", "The Exile"],
         recommendedWeapons: ["Engulfing Lightning", "The Catch", "Grasscutter's Light"],
         buildPriority: "Stack Energy Recharge (250-280%), then ATK% and Crit Rate/DMG. Electro DMG Bonus is valuable. Her burst scales with ER.",
-        constellations: "C2 is a massive power spike, ignoring 60% DEF during burst. C3 increases burst level. C6 reduces cooldown significantly."
+        constellations: "C2 is a massive power spike, ignoring 60% DEF during burst. C3 increases burst level. C6 reduces cooldown significantly.",
+        imageUrl: "https://enka.network/ui/UI_AvatarIcon_Raiden.png"
       },
       {
         id: "nahida",
@@ -86,7 +89,8 @@ export class MemStorage implements IStorage {
         recommendedArtifacts: ["Deepwood Memories", "Gilded Dreams"],
         recommendedWeapons: ["A Thousand Floating Dreams", "Sacrificial Fragments", "Magic Guide"],
         buildPriority: "Focus on Elemental Mastery (800-1000), then Crit Rate/DMG. EM is her best stat for both damage and buff strength.",
-        constellations: "C1 extends skill duration. C2 is a major boost to Dendro reactions. C6 increases crit rate and damage massively."
+        constellations: "C1 extends skill duration. C2 is a major boost to Dendro reactions. C6 increases crit rate and damage massively.",
+        imageUrl: "https://enka.network/ui/UI_AvatarIcon_Nahida.png"
       },
       {
         id: "furina",
@@ -102,7 +106,8 @@ export class MemStorage implements IStorage {
         recommendedArtifacts: ["Golden Troupe", "Tenacity of the Millelith"],
         recommendedWeapons: ["Splendor of Tranquil Waters", "Festering Desire", "Fleuve Cendre Ferryman"],
         buildPriority: "Focus on HP% for maximum buff strength and damage. Crit Rate/DMG for personal damage. Energy Recharge to maintain burst uptime.",
-        constellations: "C1 grants HP drain immunity. C2 boosts Fanfare generation. C6 provides massive crit damage boost to team."
+        constellations: "C1 grants HP drain immunity. C2 boosts Fanfare generation. C6 provides massive crit damage boost to team.",
+        imageUrl: "https://enka.network/ui/UI_AvatarIcon_Furina.png"
       },
       {
         id: "zhongli",
@@ -118,7 +123,8 @@ export class MemStorage implements IStorage {
         recommendedArtifacts: ["Tenacity of the Millelith", "Archaic Petra"],
         recommendedWeapons: ["Staff of Homa", "Black Tassel", "Favonius Lance"],
         buildPriority: "Build full HP (50k+) for strongest shield. Focus on HP% on all pieces. Some ER for burst uptime.",
-        constellations: "C1 adds second pillar. C2 adds shield to burst. C6 provides healing when shielded."
+        constellations: "C1 adds second pillar. C2 adds shield to burst. C6 provides healing when shielded.",
+        imageUrl: "https://enka.network/ui/UI_AvatarIcon_Zhongli.png"
       },
       {
         id: "xiangling",
@@ -134,7 +140,8 @@ export class MemStorage implements IStorage {
         recommendedArtifacts: ["Emblem of Severed Fate", "Crimson Witch of Flames"],
         recommendedWeapons: ["The Catch", "Dragon's Bane", "Favonius Lance"],
         buildPriority: "Focus on ER (180-200%), then ATK%, Pyro DMG, and Crit Rate/DMG. Need ER to maintain burst uptime.",
-        constellations: "C4 extends burst duration by 40%, a huge boost. C6 increases Pyro DMG bonus."
+        constellations: "C4 extends burst duration by 40%, a huge boost. C6 increases Pyro DMG bonus.",
+        imageUrl: "https://enka.network/ui/UI_AvatarIcon_Xiangling.png"
       },
       {
         id: "bennett",
@@ -150,7 +157,8 @@ export class MemStorage implements IStorage {
         recommendedArtifacts: ["Noblesse Oblige", "Crimson Witch of Flames"],
         recommendedWeapons: ["Aquila Favonia", "Prototype Rancour", "Sapwood Blade"],
         buildPriority: "Focus on ER (200-250%), then HP% for healing. Use highest base ATK weapon possible for buff strength.",
-        constellations: "C1 adds ATK boost and removes HP restriction. STOP AT C5 - do not activate C6 unless using with Pyro DPS only."
+        constellations: "C1 adds ATK boost and removes HP restriction. STOP AT C5 - do not activate C6 unless using with Pyro DPS only.",
+        imageUrl: "https://enka.network/ui/UI_AvatarIcon_Bennett.png"
       },
       {
         id: "fischl",
@@ -166,7 +174,8 @@ export class MemStorage implements IStorage {
         recommendedArtifacts: ["Thundering Fury", "Golden Troupe"],
         recommendedWeapons: ["Stringless", "Alley Hunter", "Windblume Ode"],
         buildPriority: "Focus on ATK%, Electro DMG Bonus, and Crit Rate/DMG. Some ER for burst uptime (120-140%).",
-        constellations: "C6 is a massive boost, making Oz attack with your active character. C1 adds extra damage when he's on field."
+        constellations: "C6 is a massive boost, making Oz attack with your active character. C1 adds extra damage when he's on field.",
+        imageUrl: "https://enka.network/ui/UI_AvatarIcon_Fischl.png"
       },
       {
         id: "kazuha",
@@ -182,7 +191,8 @@ export class MemStorage implements IStorage {
         recommendedArtifacts: ["Viridescent Venerer", "Instructor"],
         recommendedWeapons: ["Freedom-Sworn", "Iron Sting", "Xiphos' Moonlight"],
         buildPriority: "Stack Elemental Mastery (800-1000) for maximum buffing. Some ER (160-180%) for burst uptime.",
-        constellations: "C1 reduces skill CD. C2 boosts EM massively. C6 grants Anemo infusion after burst or skill."
+        constellations: "C1 reduces skill CD. C2 boosts EM massively. C6 grants Anemo infusion after burst or skill.",
+        imageUrl: "https://enka.network/ui/UI_AvatarIcon_Kazuha.png"
       },
       {
         id: "ganyu",
@@ -198,7 +208,8 @@ export class MemStorage implements IStorage {
         recommendedArtifacts: ["Wanderer's Troupe", "Blizzard Strayer"],
         recommendedWeapons: ["Amos' Bow", "Prototype Crescent", "Hamayumi"],
         buildPriority: "Focus on ATK%, Cryo DMG Bonus, and Crit DMG (200%+). In freeze teams, minimize Crit Rate due to resonance.",
-        constellations: "C1 reduces Cryo RES. C4 increases damage in burst. C6 grants extra charged shot after first one."
+        constellations: "C1 reduces Cryo RES. C4 increases damage in burst. C6 grants extra charged shot after first one.",
+        imageUrl: "https://enka.network/ui/UI_AvatarIcon_Ganyu.png"
       },
       {
         id: "ayaka",
@@ -214,7 +225,8 @@ export class MemStorage implements IStorage {
         recommendedArtifacts: ["Blizzard Strayer", "Gladiator's Finale"],
         recommendedWeapons: ["Mistsplitter Reforged", "Amenoma Kageuchi", "Blackcliff Longsword"],
         buildPriority: "Focus on ATK%, Cryo DMG Bonus, and Crit DMG. In freeze teams, aim for 30-40% Crit Rate only.",
-        constellations: "C1 reduces skill CD. C2 creates additional ice swords. C4 boosts burst damage massively. C6 reduces charged attack stamina cost."
+        constellations: "C1 reduces skill CD. C2 creates additional ice swords. C4 boosts burst damage massively. C6 reduces charged attack stamina cost.",
+        imageUrl: "https://enka.network/ui/UI_AvatarIcon_Ayaka.png"
       },
     ];
 
@@ -226,7 +238,8 @@ export class MemStorage implements IStorage {
         fourPieceBonus: "Increases Overloaded, Burning, and Burgeon DMG by 40%. Increases Vaporize and Melt DMG by 15%. Using an Elemental Skill increases 2-Piece Set effects by 50% for 10s. Max 3 stacks.",
         domain: "Hidden Palace of Zhou Formula",
         recommendedFor: ["Diluc", "Hu Tao", "Klee", "Yoimiya"],
-        types: ["Flower", "Feather", "Sands", "Goblet", "Circlet"]
+        types: ["Flower", "Feather", "Sands", "Goblet", "Circlet"],
+        imageUrl: "https://enka.network/ui/UI_RelicIcon_15014.png"
       },
       {
         id: "emblem-severed-fate",
@@ -235,7 +248,8 @@ export class MemStorage implements IStorage {
         fourPieceBonus: "Increases Elemental Burst DMG by 25% of Energy Recharge. A maximum of 75% bonus DMG can be obtained in this way.",
         domain: "Momiji-Dyed Court",
         recommendedFor: ["Raiden Shogun", "Xiangling", "Xingqiu", "Yelan", "Beidou"],
-        types: ["Flower", "Feather", "Sands", "Goblet", "Circlet"]
+        types: ["Flower", "Feather", "Sands", "Goblet", "Circlet"],
+        imageUrl: "https://enka.network/ui/UI_RelicIcon_15019.png"
       },
       {
         id: "noblesse-oblige",
@@ -244,7 +258,8 @@ export class MemStorage implements IStorage {
         fourPieceBonus: "Using an Elemental Burst increases all party members' ATK by 20% for 12s. This effect cannot stack.",
         domain: "Clear Pool and Mountain Cavern",
         recommendedFor: ["Bennett", "Diona", "Mona", "Zhongli"],
-        types: ["Flower", "Feather", "Sands", "Goblet", "Circlet"]
+        types: ["Flower", "Feather", "Sands", "Goblet", "Circlet"],
+        imageUrl: "https://enka.network/ui/UI_RelicIcon_15003.png"
       },
       {
         id: "viridescent-venerer",
@@ -253,7 +268,8 @@ export class MemStorage implements IStorage {
         fourPieceBonus: "Increases Swirl DMG by 60%. Decreases opponent's Elemental RES to the element infused in the Swirl by 40% for 10s.",
         domain: "Valley of Remembrance",
         recommendedFor: ["Kazuha", "Venti", "Sucrose", "Wanderer", "Xiao"],
-        types: ["Flower", "Feather", "Sands", "Goblet", "Circlet"]
+        types: ["Flower", "Feather", "Sands", "Goblet", "Circlet"],
+        imageUrl: "https://enka.network/ui/UI_RelicIcon_15007.png"
       },
       {
         id: "blizzard-strayer",
@@ -262,7 +278,8 @@ export class MemStorage implements IStorage {
         fourPieceBonus: "When a character attacks an opponent affected by Cryo, their CRIT Rate is increased by 20%. If the opponent is Frozen, CRIT Rate is increased by an additional 20%.",
         domain: "Peak of Vindagnyr",
         recommendedFor: ["Ayaka", "Ganyu", "Kaeya", "Rosaria"],
-        types: ["Flower", "Feather", "Sands", "Goblet", "Circlet"]
+        types: ["Flower", "Feather", "Sands", "Goblet", "Circlet"],
+        imageUrl: "https://enka.network/ui/UI_RelicIcon_15008.png"
       },
       {
         id: "tenacity-millelith",
@@ -271,7 +288,8 @@ export class MemStorage implements IStorage {
         fourPieceBonus: "When an Elemental Skill hits an opponent, the ATK of all nearby party members is increased by 20% and their Shield Strength is increased by 30% for 3s. This effect can be triggered once every 0.5s.",
         domain: "Ridge Watch",
         recommendedFor: ["Zhongli", "Kokomi", "Fischl", "Furina"],
-        types: ["Flower", "Feather", "Sands", "Goblet", "Circlet"]
+        types: ["Flower", "Feather", "Sands", "Goblet", "Circlet"],
+        imageUrl: "https://enka.network/ui/UI_RelicIcon_15017.png"
       },
       {
         id: "deepwood-memories",
@@ -280,7 +298,8 @@ export class MemStorage implements IStorage {
         fourPieceBonus: "After Elemental Skills or Bursts hit opponents, the targets' Dendro RES will be decreased by 30% for 8s. This effect can be triggered even if the equipping character is not on the field.",
         domain: "Spire of Solitary Enlightenment",
         recommendedFor: ["Nahida", "Tighnari", "Collei", "Baizhu"],
-        types: ["Flower", "Feather", "Sands", "Goblet", "Circlet"]
+        types: ["Flower", "Feather", "Sands", "Goblet", "Circlet"],
+        imageUrl: "https://enka.network/ui/UI_RelicIcon_15020.png"
       },
       {
         id: "gilded-dreams",
@@ -289,7 +308,8 @@ export class MemStorage implements IStorage {
         fourPieceBonus: "Within 8s of triggering an Elemental Reaction: ATK +14% for each party member whose element matches wearer, and EM +50 for each different. Each effect can stack up to 3 times.",
         domain: "Spire of Solitary Enlightenment",
         recommendedFor: ["Nahida", "Kuki Shinobu", "Thoma", "Nilou"],
-        types: ["Flower", "Feather", "Sands", "Goblet", "Circlet"]
+        types: ["Flower", "Feather", "Sands", "Goblet", "Circlet"],
+        imageUrl: "https://enka.network/ui/UI_RelicIcon_15020.png"
       },
       {
         id: "golden-troupe",
@@ -298,7 +318,8 @@ export class MemStorage implements IStorage {
         fourPieceBonus: "Increases Elemental Skill DMG by 25%. Additionally, when not on the field, Elemental Skill DMG will be increased by a further 25%. This effect will be cleared 2s after taking the field.",
         domain: "Denouement of Sin",
         recommendedFor: ["Furina", "Fischl", "Yae Miko", "Albedo"],
-        types: ["Flower", "Feather", "Sands", "Goblet", "Circlet"]
+        types: ["Flower", "Feather", "Sands", "Goblet", "Circlet"],
+        imageUrl: "https://enka.network/ui/UI_RelicIcon_15023.png"
       },
       {
         id: "wanderers-troupe",
@@ -307,7 +328,8 @@ export class MemStorage implements IStorage {
         fourPieceBonus: "Increases Charged Attack DMG by 35% if the character uses a Catalyst or Bow.",
         domain: "Elite Bosses",
         recommendedFor: ["Ganyu", "Tighnari", "Yanfei", "Wanderer"],
-        types: ["Flower", "Feather", "Sands", "Goblet", "Circlet"]
+        types: ["Flower", "Feather", "Sands", "Goblet", "Circlet"],
+        imageUrl: "https://enka.network/ui/UI_RelicIcon_15006.png"
       },
       {
         id: "shimenawa-reminiscence",
@@ -316,7 +338,8 @@ export class MemStorage implements IStorage {
         fourPieceBonus: "When casting an Elemental Skill, if the character has 15 or more Energy, they lose 15 Energy and Normal/Charged/Plunging Attack DMG is increased by 50% for 10s.",
         domain: "Momiji-Dyed Court",
         recommendedFor: ["Hu Tao", "Yoimiya", "Ayato"],
-        types: ["Flower", "Feather", "Sands", "Goblet", "Circlet"]
+        types: ["Flower", "Feather", "Sands", "Goblet", "Circlet"],
+        imageUrl: "https://enka.network/ui/UI_RelicIcon_15018.png"
       },
       {
         id: "gladiators-finale",
@@ -325,7 +348,8 @@ export class MemStorage implements IStorage {
         fourPieceBonus: "If the wielder of this artifact set uses a Sword, Claymore or Polearm, increases their Normal Attack DMG by 35%.",
         domain: "Elite Bosses",
         recommendedFor: ["Diluc", "Razor", "Noelle", "Xiao"],
-        types: ["Flower", "Feather", "Sands", "Goblet", "Circlet"]
+        types: ["Flower", "Feather", "Sands", "Goblet", "Circlet"],
+        imageUrl: "https://enka.network/ui/UI_RelicIcon_15001.png"
       },
     ];
 

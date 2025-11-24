@@ -48,8 +48,15 @@ export default function Artifacts() {
               >
                 <CardHeader className="p-6">
                   <div className="flex items-start gap-4 mb-4">
-                    <div className="p-3 rounded-md bg-primary/10 border border-primary/20">
-                      <Box className="h-6 w-6 text-primary" />
+                    <div className="w-20 h-20 rounded-md bg-primary/10 border border-primary/20 overflow-hidden flex-shrink-0">
+                      <img 
+                        src={artifact.imageUrl} 
+                        alt={artifact.name}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.currentTarget.parentElement!.innerHTML = '<div class="flex items-center justify-center h-full"><Box className="h-6 w-6 text-primary" /></div>';
+                        }}
+                      />
                     </div>
                     <div className="flex-1">
                       <CardTitle className="text-xl mb-2">{artifact.name}</CardTitle>

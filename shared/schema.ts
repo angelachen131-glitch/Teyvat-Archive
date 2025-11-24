@@ -39,6 +39,7 @@ export interface Character {
   recommendedWeapons: string[];
   buildPriority: string;
   constellations: string;
+  imageUrl: string;
 }
 
 // Artifact set interface
@@ -50,6 +51,7 @@ export interface ArtifactSet {
   domain: string;
   recommendedFor: string[];
   types: ArtifactType[];
+  imageUrl: string;
 }
 
 // Team composition interface
@@ -84,6 +86,7 @@ export const insertCharacterSchema = z.object({
   recommendedWeapons: z.array(z.string()),
   buildPriority: z.string(),
   constellations: z.string(),
+  imageUrl: z.string(),
 });
 
 export const insertArtifactSetSchema = z.object({
@@ -93,6 +96,7 @@ export const insertArtifactSetSchema = z.object({
   domain: z.string(),
   recommendedFor: z.array(z.string()),
   types: z.array(z.enum(artifactTypes)),
+  imageUrl: z.string(),
 });
 
 export const insertTeamSchema = z.object({

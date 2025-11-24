@@ -173,9 +173,14 @@ export default function Characters() {
                 >
                   <CardHeader className="p-6">
                     <div className="relative aspect-[3/4] mb-4 rounded-md bg-muted overflow-hidden">
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <Sparkles className="h-16 w-16 text-muted-foreground/20" />
-                      </div>
+                      <img 
+                        src={character.imageUrl} 
+                        alt={character.name}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none';
+                        }}
+                      />
                       <Badge
                         className={`absolute top-2 right-2 ${getElementColor(character.element)}`}
                         variant="outline"

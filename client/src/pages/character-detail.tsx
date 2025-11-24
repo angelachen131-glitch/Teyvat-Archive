@@ -58,6 +58,14 @@ export default function CharacterDetail() {
         </Link>
 
         <div className={`relative h-80 rounded-lg mb-12 overflow-hidden border-4 ${getElementBgColor(character.element)}`}>
+          <img 
+            src={character.imageUrl} 
+            alt={character.name}
+            className="absolute inset-0 w-full h-full object-cover"
+            onError={(e) => {
+              e.currentTarget.style.display = 'none';
+            }}
+          />
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent" />
           <div className="relative h-full flex items-center px-12">
             <div className="max-w-2xl">
