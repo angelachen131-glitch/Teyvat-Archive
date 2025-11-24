@@ -29,6 +29,8 @@ export function Layout({ children }: LayoutProps) {
     { path: "/characters", label: "Characters" },
     { path: "/artifacts", label: "Artifacts" },
     { path: "/team-builder", label: "Team Builder" },
+    { path: "/domains", label: "Domains" },
+    { path: "/build-comparison", label: "Build Compare" },
     { path: "/guide", label: "Beginner's Guide" },
   ];
 
@@ -64,6 +66,15 @@ export function Layout({ children }: LayoutProps) {
                 </Button>
               </Link>
             ))}
+            <Link href="/favorites">
+              <Button
+                variant={location === "/favorites" ? "secondary" : "ghost"}
+                className="font-medium"
+                data-testid="link-nav-favorites"
+              >
+                Favorites
+              </Button>
+            </Link>
           </nav>
 
           <div className="flex items-center gap-2">
@@ -110,6 +121,16 @@ export function Layout({ children }: LayoutProps) {
                   </Button>
                 </Link>
               ))}
+              <Link href="/favorites">
+                <Button
+                  variant={location === "/favorites" ? "secondary" : "ghost"}
+                  className="w-full justify-start font-medium"
+                  onClick={() => setIsMenuOpen(false)}
+                  data-testid="link-mobile-favorites"
+                >
+                  Favorites
+                </Button>
+              </Link>
             </div>
           </nav>
         )}

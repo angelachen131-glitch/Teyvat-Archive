@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
-import { Sparkles, Filter, X } from "lucide-react";
+import { Sparkles, Filter, X, Heart } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -9,6 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import type { Character, Element, WeaponType, Region } from "@shared/schema";
 import { elements, weaponTypes, regions } from "@shared/schema";
 import { getElementColor, getElementBgColor, getStarDisplay } from "@/lib/utils";
+import { useFavorites } from "@/hooks/use-favorites";
 
 export default function Characters() {
   const [elementFilter, setElementFilter] = useState<Element | null>(null);
@@ -19,6 +20,8 @@ export default function Characters() {
   const { data: characters = [], isLoading } = useQuery<Character[]>({
     queryKey: ["/api/characters"],
   });
+
+  const { isFavorited, toggleFavorite, favorites } = useFavorites("characters");
 
   const filteredCharacters = characters.filter((char) => {
     if (elementFilter && char.element !== elementFilter) return false;
@@ -43,6 +46,14 @@ export default function Characters() {
         <div className="flex items-center gap-3 mb-8">
           <Sparkles className="h-8 w-8 text-primary" />
           <h1 className="font-heading font-bold text-4xl md:text-5xl">Character Database</h1>
+          {favorites.length > 0 && (
+            <Link href="/favorites" className="ml-auto">
+              <Button variant="outline" size="sm" data-testid="button-view-favorites">
+                <Heart className="h-4 w-4 mr-2 fill-current text-red-500" />
+                Favorites ({favorites.length})
+              </Button>
+            </Link>
+          )}
         </div>
         <p className="text-muted-foreground text-lg mb-12 max-w-3xl">
           Explore all playable characters in Genshin Impact. Filter by element, weapon type, region, and rarity to find your favorites.
@@ -166,46 +177,67 @@ export default function Characters() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredCharacters.map((character) => (
-              <Link key={character.id} href={`/characters/${character.id}`}>
-                <Card
-                  className={`h-full hover-elevate active-elevate-2 cursor-pointer transition-all group border-2 ${getElementBgColor(character.element)}`}
-                  data-testid={`card-character-${character.id}`}
-                >
-                  <CardHeader className="p-6">
-                    <div className="relative aspect-[3/4] mb-4 rounded-md bg-muted overflow-hidden">
-                      <img 
-                        src={character.imageUrl} 
-                        alt={character.name}
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          e.currentTarget.style.display = 'none';
-                        }}
-                      />
-                      <Badge
-                        className={`absolute top-2 right-2 ${getElementColor(character.element)}`}
-                        variant="outline"
-                      >
-                        {character.element}
-                      </Badge>
-                    </div>
-                    <CardTitle className="text-xl mb-2 group-hover:text-primary transition-colors">
-                      {character.name}
-                    </CardTitle>
-                    <CardDescription className="space-y-1">
-                      <div className="flex items-center gap-2">
-                        <span className="text-yellow-500">{getStarDisplay(character.rarity)}</span>
-                        <span>•</span>
-                        <span>{character.weapon}</span>
-                      </div>
-                      <div className="text-xs">
-                        <Badge variant="secondary" className="text-xs">
-                          {character.role}
+              <div key={character.id}>
+                <Link href={`/characters/${character.id}`}>
+                  <Card
+                    className={`h-full hover-elevate active-elevate-2 cursor-pointer transition-all group border-2 ${getElementBgColor(character.element)}`}
+                    data-testid={`card-character-${character.id}`}
+                  >
+                    <CardHeader className="p-6">
+                      <div className="relative aspect-[3/4] mb-4 rounded-md bg-muted overflow-hidden">
+                        <img 
+                          src={character.imageUrl} 
+                          alt={character.name}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                          }}
+                        />
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="absolute top-2 left-2 h-9 w-9"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            toggleFavorite(character.id);
+                          }}
+                          data-testid={`button-favorite-${character.id}`}
+                        >
+                          <Heart
+                            className={`h-5 w-5 ${
+                              isFavorited(character.id)
+                                ? "fill-red-500 text-red-500"
+                                : "text-white drop-shadow-md"
+                            }`}
+                          />
+                        </Button>
+                        <Badge
+                          className={`absolute top-2 right-2 ${getElementColor(character.element)}`}
+                          variant="outline"
+                        >
+                          {character.element}
                         </Badge>
                       </div>
-                    </CardDescription>
-                  </CardHeader>
-                </Card>
-              </Link>
+                      <CardTitle className="text-xl mb-2 group-hover:text-primary transition-colors">
+                        {character.name}
+                      </CardTitle>
+                      <CardDescription className="space-y-1">
+                        <div className="flex items-center gap-2">
+                          <span className="text-yellow-500">{getStarDisplay(character.rarity)}</span>
+                          <span>•</span>
+                          <span>{character.weapon}</span>
+                        </div>
+                        <div className="text-xs">
+                          <Badge variant="secondary" className="text-xs">
+                            {character.role}
+                          </Badge>
+                        </div>
+                      </CardDescription>
+                    </CardHeader>
+                  </Card>
+                </Link>
+              </div>
             ))}
           </div>
         )}

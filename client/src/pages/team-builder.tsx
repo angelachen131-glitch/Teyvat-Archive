@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Swords, Plus, X, Zap } from "lucide-react";
+import { Swords, Plus, X, Zap, TrendingUp, AlertCircle, CheckCircle } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -60,6 +60,78 @@ export default function TeamBuilder() {
   };
 
   const reactions = getTeamReactions();
+
+  const getTeamSynergyAnalysis = () => {
+    if (selectedCharacters.length === 0) {
+      return { coverage: 0, roleBalance: [], warnings: [], recommendations: [] };
+    }
+
+    const elements = selectedCharacters.map((c) => c.element);
+    const roles = selectedCharacters.map((c) => c.role);
+    const uniqueElements = new Set(elements).size;
+    
+    // Calculate element coverage (1-5 scale)
+    const coverage = Math.min(5, uniqueElements);
+
+    // Check role balance
+    const roleCounts = roles.reduce(
+      (acc, role) => {
+        acc[role] = (acc[role] || 0) + 1;
+        return acc;
+      },
+      {} as Record<string, number>
+    );
+
+    const roleBalance = Object.entries(roleCounts).map(([role, count]) => ({ role, count }));
+
+    // Generate recommendations
+    const warnings: string[] = [];
+    const recommendations: string[] = [];
+
+    const hasDPS = roles.includes("DPS") || roles.includes("Sub-DPS");
+    const hasHealer = roles.includes("Healer");
+    const hasSupport = roles.includes("Support");
+
+    if (!hasDPS) {
+      warnings.push("Team lacks a DPS character for damage output");
+    }
+    if (!hasHealer && selectedCharacters.length >= 3) {
+      recommendations.push("Consider adding a Healer for survivability");
+    }
+    if (!hasSupport && selectedCharacters.length >= 3) {
+      recommendations.push("A Support character can enhance team damage");
+    }
+
+    if (uniqueElements === 1) {
+      recommendations.push("Team is mono-element. Add different elements for reactions");
+    } else if (coverage >= 3) {
+      recommendations.push("Good elemental diversity for consistent reactions");
+    }
+
+    return { coverage, roleBalance, warnings, recommendations };
+  };
+
+  const synergy = getTeamSynergyAnalysis();
+
+  const getCharacterPairSynergy = (char1: Character, char2: Character): string | null => {
+    // Check if they trigger good reactions
+    const hasReaction = reactions.some(
+      (r) =>
+        (r.elements[0] === char1.element && r.elements[1] === char2.element) ||
+        (r.elements[0] === char2.element && r.elements[1] === char1.element)
+    );
+
+    // Check role synergy
+    const roleCombo = `${char1.role}-${char2.role}`;
+    const goodCombos = ["DPS-Support", "DPS-Sub-DPS", "DPS-Healer", "Sub-DPS-Support"];
+    const hasRoleSynergy = goodCombos.some(
+      (combo) => roleCombo === combo || roleCombo === combo.split("-").reverse().join("-")
+    );
+
+    if (hasReaction && hasRoleSynergy) return "Excellent";
+    if (hasReaction || hasRoleSynergy) return "Good";
+    return null;
+  };
 
   return (
     <div className="py-12 md:py-16">
@@ -129,6 +201,112 @@ export default function TeamBuilder() {
               </div>
             </CardContent>
           </Card>
+
+          {selectedCharacters.length > 1 && (
+            <Card data-testid="card-synergy-analysis">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <TrendingUp className="h-5 w-5 text-primary" />
+                  Team Synergy Analysis
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                {/* Element Coverage */}
+                <div>
+                  <div className="flex items-center gap-2 mb-3">
+                    <h4 className="font-semibold">Element Coverage</h4>
+                    <div className="flex gap-1">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <div
+                          key={i}
+                          className={`h-2 w-6 rounded-full ${
+                            i < synergy.coverage ? "bg-primary" : "bg-muted"
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    {synergy.coverage}/5 unique elements in your team
+                  </p>
+                </div>
+
+                {/* Role Balance */}
+                <div>
+                  <h4 className="font-semibold mb-3">Role Distribution</h4>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    {["DPS", "Sub-DPS", "Support", "Healer"].map((role) => {
+                      const count = synergy.roleBalance.find((r) => r.role === role)?.count || 0;
+                      return (
+                        <div key={role} className="p-2 rounded-md bg-muted text-center">
+                          <p className="text-xs font-medium text-muted-foreground">{role}</p>
+                          <p className="text-lg font-bold">{count}</p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Character Pair Synergies */}
+                {selectedCharacters.length >= 2 && (
+                  <div>
+                    <h4 className="font-semibold mb-3">Character Pair Synergies</h4>
+                    <div className="space-y-2">
+                      {selectedCharacters.map((char1, i1) =>
+                        selectedCharacters.map((char2, i2) => {
+                          if (i1 >= i2) return null;
+                          const synergy_level = getCharacterPairSynergy(char1, char2);
+                          return synergy_level ? (
+                            <div key={`${i1}-${i2}`} className="flex items-center gap-2 p-2 rounded-md bg-muted/50">
+                              <div className="flex-1 text-sm">
+                                <span className="font-medium">{char1.name}</span>
+                                <span className="text-muted-foreground"> + </span>
+                                <span className="font-medium">{char2.name}</span>
+                              </div>
+                              <Badge
+                                variant="outline"
+                                className={
+                                  synergy_level === "Excellent"
+                                    ? "bg-green-500/20 text-green-700 dark:text-green-400 border-green-500/50"
+                                    : "bg-blue-500/20 text-blue-700 dark:text-blue-400 border-blue-500/50"
+                                }
+                              >
+                                {synergy_level}
+                              </Badge>
+                            </div>
+                          ) : null;
+                        })
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* Warnings */}
+                {synergy.warnings.length > 0 && (
+                  <div className="space-y-2">
+                    {synergy.warnings.map((warning, idx) => (
+                      <div key={idx} className="flex items-start gap-2 p-3 rounded-md bg-yellow-500/10 border border-yellow-500/30">
+                        <AlertCircle className="h-5 w-5 text-yellow-600 dark:text-yellow-500 flex-shrink-0 mt-0.5" />
+                        <p className="text-sm text-yellow-700 dark:text-yellow-400">{warning}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Recommendations */}
+                {synergy.recommendations.length > 0 && (
+                  <div className="space-y-2">
+                    {synergy.recommendations.map((rec, idx) => (
+                      <div key={idx} className="flex items-start gap-2 p-3 rounded-md bg-blue-500/10 border border-blue-500/30">
+                        <CheckCircle className="h-5 w-5 text-blue-600 dark:text-blue-500 flex-shrink-0 mt-0.5" />
+                        <p className="text-sm text-blue-700 dark:text-blue-400">{rec}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          )}
 
           {reactions.length > 0 && (
             <Card>
