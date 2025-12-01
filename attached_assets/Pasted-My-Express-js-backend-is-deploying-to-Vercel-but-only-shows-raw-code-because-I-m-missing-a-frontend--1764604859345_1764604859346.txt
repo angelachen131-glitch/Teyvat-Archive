@@ -1,0 +1,80 @@
+My Express.js backend is deploying to Vercel but only shows raw code because I'm missing a frontend interface. I have character/artifact/team data stored in server/storage.ts that needs to be displayed in a user-friendly web interface.
+Current Situation
+
+Backend Express API working with TypeScript
+Character data hardcoded in server/storage.ts with fields like: id, name, element, weapon, rarity, region, role, description, lore, talents, imageUrl
+Using Vite build system
+Deploying to Vercel but showing raw code instead of a website
+
+What I Need
+Create a complete frontend interface that displays my game character data:
+1. Frontend Structure
+
+Create a proper index.html in the project root
+Add React components (or vanilla JS) to display the character roster
+Style it with Tailwind CSS or vanilla CSS
+Make it responsive and visually appealing
+
+2. Display Features
+
+Character Grid/List: Show all characters with their images, names, and basic info
+Search/Filter: Allow filtering by element, region, role, rarity
+Character Details: Click on a character to see full details (talents, lore, recommended artifacts/weapons)
+Responsive Design: Works on mobile and desktop
+
+3. API Integration
+
+Fetch character data from the Express backend API endpoints
+Handle loading states and errors gracefully
+Display character images from the URLs in the data
+
+4. File Organization
+/
+├── index.html          (Main entry point)
+├── src/
+│   ├── App.tsx/jsx     (Main React component)
+│   ├── components/     (Character cards, filters, etc.)
+│   └── styles/         (CSS files)
+├── server/
+│   ├── index.ts        (Express API - keep existing)
+│   ├── routes.ts       (API routes - keep existing)
+│   └── storage.ts      (Data - keep existing)
+├── vercel.json         (Updated config for both frontend + API)
+└── package.json        (Updated dependencies)
+5. Vercel Configuration
+Update vercel.json to:
+
+Serve the built frontend from /dist
+Route API calls to /api/* to the Express serverless functions
+Handle all other routes to the frontend
+
+6. Update package.json
+Add necessary frontend dependencies:
+
+React and ReactDOM (if using React)
+Any UI libraries you recommend
+Keep existing Express dependencies
+
+7. Build Process
+
+Frontend should build to dist/ folder
+API should work as serverless functions in api/ folder
+Both should work together when deployed to Vercel
+
+Design Preferences
+
+Gaming/fantasy theme that matches the character data (Genshin Impact style)
+Clean, modern UI
+Easy navigation
+Show character element colors
+Display rarity with stars or similar visual indicator
+
+Important Requirements
+
+Must work on Vercel's free tier
+Keep all existing character data intact
+API endpoints should remain functional
+Frontend should be the default page visitors see
+Make it look professional, not just functional
+
+Please create all necessary files and update existing configuration to make this work as a complete full-stack application on Vercel.

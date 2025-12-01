@@ -8,7 +8,7 @@ declare module 'http' {
 }
 
 // Import routes
-import { IStorage, MemStorage } from "../server/storage";
+import { MemStorage } from "../server/storage";
 import { insertTeamSchema } from "../shared/schema";
 
 const app = express();
@@ -38,7 +38,7 @@ app.use((req, res, next) => {
 
   res.on("finish", () => {
     const duration = Date.now() - start;
-    if (path.startsWith("/api")) {
+    if (path.startsWith("/")) {
       let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
       if (capturedJsonResponse) {
         logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
@@ -55,7 +55,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// API Routes
+// API Routes - Characters
 app.get("/api/characters", async (req, res) => {
   try {
     const characters = await storage.getAllCharacters();
@@ -77,6 +77,7 @@ app.get("/api/characters/:id", async (req, res) => {
   }
 });
 
+// API Routes - Artifacts
 app.get("/api/artifacts", async (req, res) => {
   try {
     const artifacts = await storage.getAllArtifacts();
@@ -86,6 +87,7 @@ app.get("/api/artifacts", async (req, res) => {
   }
 });
 
+// API Routes - Teams
 app.get("/api/teams", async (req, res) => {
   try {
     const teams = await storage.getAllTeams();
