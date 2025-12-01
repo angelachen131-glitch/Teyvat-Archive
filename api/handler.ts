@@ -1,5 +1,4 @@
 import express, { type Request, Response, NextFunction } from "express";
-import type { VercelRequest, VercelResponse } from "@vercel/node";
 
 declare module 'http' {
   interface IncomingMessage {
@@ -130,6 +129,6 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
 });
 
 // Export for Vercel
-export default function handler(req: VercelRequest, res: VercelResponse) {
-  return app(req as any, res as any);
+export default function handler(req: Request, res: Response) {
+  return app(req, res);
 }
