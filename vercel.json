@@ -1,0 +1,21 @@
+{
+  "buildCommand": "npm run build",
+  "framework": "vite",
+  "outputDirectory": "dist/public",
+  "env": {
+    "NODE_ENV": "production",
+    "DATABASE_URL": "@database_url"
+  },
+  "functions": {
+    "api/**/*.ts": {
+      "memory": 3008,
+      "maxDuration": 30
+    }
+  },
+  "redirects": [
+    {
+      "source": "/api/:path*",
+      "destination": "/api/handler/:path*"
+    }
+  ]
+}
